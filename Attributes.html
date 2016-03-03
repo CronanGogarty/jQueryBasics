@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+
+<body>
+    <iframe src="http://learn.jquery.com/using-jquery-core/document-ready/"></iframe>
+    <ul>
+        <li><a href="http://contribute.jquery.org/CLA/">CLA</a></li>
+        <li><a href="http://contribute.jquery.org/style-guide/">Style Guides</a></li>
+        <li><a href="http://contribute.jquery.org/triage/">Bug Triage</a></li>
+        <li><a href="http://contribute.jquery.org/code/">Code</a></li>
+        <li><a href="http://contribute.jquery.org/documentation/">Documentation</a></li>
+        <li><a href="http://contribute.jquery.org/web-sites/">Web Sites</a></li>
+    </ul>
+    
+    <script>
+        $( document ).ready(function() {
+        $( "a" ).attr( "href", "allMyHrefsAreTheSameNow.html" );
+ 
+
+    });
+ 
+    $( window ).load(function() {
+        $( "a" ).attr({
+            title: "all titles are the same too!",
+            href: "somethingNew.html"
+        });
+    });
+    
+    console.log($( "a" ).attr( "href" )); // Returns the href for the first a element in the document
+    </script>
+    
+</body>
+
+</html>
