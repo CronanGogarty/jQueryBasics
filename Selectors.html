@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,6 +31,15 @@
         .hilite {
             background-color: yellow;
         }
+        header, footer, button, div {
+            margin-left:10px;
+        }
+        div {
+            margin-bottom:1px;
+        }
+        .wrappedPara, .divWrappedDiv{
+            margin:0;
+        }
     </style>
 
     <script>
@@ -47,9 +56,42 @@
     
     <main>
         <button id="btnSelectdivID1">Select by ID</button>
-        
         <div id="divID1">This div has ID= "divID1"</div>
-            
+        <hr />
+        <button id="btnSelectClasses">Select by class</button>
+        <div class="clsSelectClasses">clsSelectClasses</div>
+        <div class="clsSelectClasses">clsSelectClasses</div>
+        <div class="clsSelectClasses">clsSelectClasses</div>
+        <div class="clsSelectClasses">clsSelectClasses</div>
+        <hr />
+        <button id="btnSelectByAttribute">Select by attribute</button>
+        <div title="do-not-select">div title="do-not-select"</div>
+        <div title="do-select">div title="do-select"</div>
+        <hr />
+        <button id="btnSelectByCompoundCSS">Select by compound CSS selector</button>
+        <div id="divCompoundSelect1">
+            <p class="wrappedPara">Paragraph wrapped by div.divCompoundSelect1</p>
+        </div>
+        <div id="divCompoundSelect2">
+            <p class="wrappedPara">Paragraph wrapped by div.divCompoundSelect2</p>
+        </div>
+        <hr />
+        <button id="btnSelectMultiple">Select multiple elements</button>
+        <div class="divSelectMulti1">Select multiple elements div</div>
+        <hr />
+        <button id="btnSelectFirstElement">Select first element</button>
+        <button id="btnSelectOddElements">Select odd elements</button><span>NOTE: The index numbers start at 0.</span>
+        <div id="divPseudoSelect1Wrapper">
+            <div class="divWrappedDiv">Pseudo select div1</div>
+            <div class="divWrappedDiv">Pseudo select div2</div>
+            <div class="divWrappedDiv">Pseudo select div3</div>
+            <div class="divWrappedDiv">Pseudo select div4</div>
+            <div class="divWrappedDiv">Pseudo select div5</div>
+            <div class="divWrappedDiv">Pseudo select div6</div>
+            <div class="divWrappedDiv">Pseudo select div7</div>
+            <div class="divWrappedDiv">Pseudo select div8</div>
+
+        </div>
     </main>
     
     <footer>
@@ -67,7 +109,13 @@
         //          $("#divID1").removeClass("hilite");
         //     }
         // });
-        $("#btnSelectdivID1").bind('click', function(){$("#divID1").toggleClass("hilite")});
+        $("#btnSelectdivID1").bind('click', function () { $("#divID1").toggleClass("hilite") });
+        $("#btnSelectClasses").bind('click', function () { $('.clsSelectClasses').toggleClass('hilite') });
+        $('#btnSelectByAttribute').bind('click', function () { $("div[title='do-select']").toggleClass('hilite') });
+        $('#btnSelectByCompoundCSS').bind('click', function () { $("div#divCompoundSelect2 p").toggleClass('hilite') });
+        $('#btnSelectMultiple').bind('click', function () { $('.divSelectMulti1, #divCompoundSelect1 .wrappedPara').toggleClass('hilite') });
+        $('#btnSelectFirstElement').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:first').toggleClass('hilite') });
+        $('#btnSelectOddElements').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:odd').toggleClass('hilite') });
     </script>
 
 </body>
