@@ -45,6 +45,9 @@
         .outline {
             outline:3px solid #ff0;
         }
+        .wrapChecked {
+            outline:3px solid red;
+        }
         header, footer, button, div, span {
             margin-left:10px;
         }
@@ -146,6 +149,7 @@
         
         <form id="myForm">
             <button id="btnCheckedElements">Select checked elements</button>
+            <button id="btnSelectPassword">Select password input</button>
             <div><label for="inText">Enter name:</label><input id="inText" type="text" /></div>
             <div><label for="inCheck">Checkbox</label><input id="inCheck" type="checkbox" /></div>
             <div><label>Radio Button:</label><br />
@@ -153,6 +157,7 @@
                 <input type="radio" id="inRadio2" name="RadioGroup" value="two" /><label for="inRadio2">Two</label><br />
                 <input type="radio" id="inRadio3" name="RadioGroup" value="one" /><label for="inRadio3">Three</label><br />
             </div>
+            <div><label for="inPassword">Enter password:</label><input type="password" id="inPassword" /></div>
         </form>
     </main>
     
@@ -204,12 +209,18 @@
                 var parent = $('#inCheck').parent();
                 (!parent.hasClass('outline')) ? parent.addClass('outline') : parent.removeClass('outline');
             });
-            $('#btnCheckedElements').click(function (e) {
-                var checked = $('input:checked');
-                $('input:checked').wrap("<span style='background-color:red'>");
-                console.log(checked);
-                e.preventDefault();
+            //$('#btnCheckedElements').click(function (e) {
+            //    $('input:checked').addClass('wrapChecked');
+            //    e.preventDefault();
+            //    $('input:checked').fadeOut("slow", function () {
+            //        $(this).removeClass('wrapChecked');
+            //    });
+        //});
+            $('#btnCheckedElements').bind('click', function () {
+                $('input:checked').toggleClass('wrapChecked');
+                return false;
             });
+            $('#btnSelectPassword').click(function () { $('#inPassword').toggleClass('hilite'); return false; });
     </script>
 
 </body>
