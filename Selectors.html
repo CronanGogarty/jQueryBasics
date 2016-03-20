@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>page | site</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <title>Selectors | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     
@@ -26,12 +26,26 @@
     <style type="text/css">
         /* :root will select the document's root element - in html that is always the html tag*/
         :root {
-            background-color:#369;
+            background-color:#399;
+        }
+        header, footer  {
+            outline:1px solid #333;
+            background-color:#999;
+            box-shadow:10px 10px 3px #000;
+            margin-right:20px;
+            padding-left:10px;
+        }
+        hr  {
+            border:1px solid #000;
+
         }
         .hilite {
             background-color: yellow;
         }
-        header, footer, button, div {
+        .outline {
+            outline:3px solid #ff0;
+        }
+        header, footer, button, div, span {
             margin-left:10px;
         }
         div {
@@ -39,6 +53,16 @@
         }
         .wrappedPara, .divWrappedDiv{
             margin:0;
+        }
+        span::after {content:"\A"; white-space:pre;}
+        form div {
+            border:1px solid #000;
+            width:300px;
+            text-align:right;
+            min-height:26px;
+        }
+        form label {
+            float:left;
         }
     </style>
 
@@ -79,8 +103,10 @@
         <button id="btnSelectMultiple">Select multiple elements</button>
         <div class="divSelectMulti1">Select multiple elements div</div>
         <hr />
+        <span style="background-color:white;">NOTE: The index numbers start at 0.</span>
         <button id="btnSelectFirstElement">Select first element</button>
-        <button id="btnSelectOddElements">Select odd elements</button><span>NOTE: The index numbers start at 0.</span>
+        <button id="btnSelectOddElements">Select odd elements</button>
+        <button id="btnSelectGreaterThan">Select greater than 3</button>
         <div id="divPseudoSelect1Wrapper">
             <div class="divWrappedDiv">Pseudo select div1</div>
             <div class="divWrappedDiv">Pseudo select div2</div>
@@ -90,8 +116,44 @@
             <div class="divWrappedDiv">Pseudo select div6</div>
             <div class="divWrappedDiv">Pseudo select div7</div>
             <div class="divWrappedDiv">Pseudo select div8</div>
-
         </div>
+        <hr id="selectAfter" />
+        <button id="btnContainsElement">Does jQuery return an element?</button>
+        <button id="btnSelectNot">Select element :not specified</button>
+        <button id="btnSelectContains">Select element that contains span</button>
+        <div id="divReturnedElement">This element will be returned by jQuery - look at the output in console window.</div>
+        <div class="divNot">Will be selected by :not psuedoclass</div>
+        <div class="divNot">Will be selected by :not psuedoclass</div>
+        <div class="divNot">Will be selected by :not psuedoclass</div>
+        <div class="divNot">Will be selected by :not psuedoclass</div>
+        <div class="divNot">Will be selected by :not pseudoclass and contains a <span>span</span></div>
+        <hr />
+        <button id="btnSelectFirstLI">Select 1st ListItem</button>
+        <button id="btnSelectLIclass">Select ListItem with class = liSelect</button>
+        <button id="btnSelectLI5th">Select 7th ListItem</button>
+        <ul>
+            <li>ListItem 1</li>
+            <li>ListItem 2</li>
+            <li>ListItem 3</li>
+            <li>ListItem 4</li>
+            <li class="liSelect">ListItem 5 - class:liSelect</li>
+            <li>ListItem 6</li>
+            <li>ListItem 7 - (7th li = eq(6))</li>
+            <li>ListItem 8</li>
+
+        </ul>
+        <hr />
+        
+        <form id="myForm">
+            <button id="btnCheckedElements">Select checked elements</button>
+            <div><label for="inText">Enter name:</label><input id="inText" type="text" /></div>
+            <div><label for="inCheck">Checkbox</label><input id="inCheck" type="checkbox" /></div>
+            <div><label>Radio Button:</label><br />
+                <input type="radio" id="inRadio1" name="RadioGroup" value="one" checked="checked" /><label for="inRadio1">One</label><br />
+                <input type="radio" id="inRadio2" name="RadioGroup" value="two" /><label for="inRadio2">Two</label><br />
+                <input type="radio" id="inRadio3" name="RadioGroup" value="one" /><label for="inRadio3">Three</label><br />
+            </div>
+        </form>
     </main>
     
     <footer>
@@ -99,23 +161,55 @@
     </footer>
     
     <script>
-        // document.getElementById('btnSelectdivID1').addEventListener('click',function()
-        // {
-        //     if(!$("#divID1").hasClass("hilite")) 
-        //     {
-        //          $("#divID1").addClass("hilite");
-        //     }
-        //     else    {
-        //          $("#divID1").removeClass("hilite");
-        //     }
-        // });
-        $("#btnSelectdivID1").bind('click', function () { $("#divID1").toggleClass("hilite") });
-        $("#btnSelectClasses").bind('click', function () { $('.clsSelectClasses').toggleClass('hilite') });
-        $('#btnSelectByAttribute').bind('click', function () { $("div[title='do-select']").toggleClass('hilite') });
-        $('#btnSelectByCompoundCSS').bind('click', function () { $("div#divCompoundSelect2 p").toggleClass('hilite') });
-        $('#btnSelectMultiple').bind('click', function () { $('.divSelectMulti1, #divCompoundSelect1 .wrappedPara').toggleClass('hilite') });
-        $('#btnSelectFirstElement').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:first').toggleClass('hilite') });
-        $('#btnSelectOddElements').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:odd').toggleClass('hilite') });
+            // document.getElementById('btnSelectdivID1').addEventListener('click',function()
+            // {
+            //     if(!$("#divID1").hasClass("hilite")) 
+            //     {
+            //          $("#divID1").addClass("hilite");
+            //     }
+            //     else    {
+            //          $("#divID1").removeClass("hilite");
+            //     }
+            // });
+            $("#btnSelectdivID1").bind('click', function () { $("#divID1").toggleClass("hilite") });
+            $("#btnSelectClasses").bind('click', function () { $('.clsSelectClasses').toggleClass('hilite') });
+            $('#btnSelectByAttribute').bind('click', function () { $("div[title='do-select']").toggleClass('hilite') });
+            $('#btnSelectByCompoundCSS').bind('click', function () { $("div#divCompoundSelect2 p").toggleClass('hilite') });
+            $('#btnSelectMultiple').bind('click', function () { $('.divSelectMulti1, #divCompoundSelect1 .wrappedPara').toggleClass('hilite') });
+            $('#btnSelectFirstElement').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:first').toggleClass('hilite') });
+            $('#btnSelectOddElements').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:odd').toggleClass('hilite') });
+            $('#btnSelectGreaterThan').bind('click', function () { $('#divPseudoSelect1Wrapper div:gt(3)').toggleClass('hilite') });
+            $('#btnContainsElement').bind('click', function () {
+                //if($('#divReturnedElement').length) {
+                //    console.log("jQuery contains an element");
+                //}
+                var rand = Math.floor((Math.random() * 10) + 1);    //return a number between 1 and 10 inclusive
+                var selElement = (rand >= 5) ? $('#divReturnedElement') : $('divDoesNotExist');
+                (selElement.length) ? console.log('true') : console.log('false');
+            });
+            $('#btnSelectNot').bind('click', function () { $('#selectAfter ~ div').not('#divReturnedElement').toggleClass('hilite') });
+            $('#btnSelectContains').bind('click', function () { $('.divNot').has('span').toggleClass('hilite') });
+            //ul li
+            $('#btnSelectFirstLI').bind('click', function () { $('ul li').first().toggleClass('hilite') });
+            $('#btnSelectLIclass').bind('click', function () { $('ul li').filter('.liSelect').toggleClass('hilite') });
+            $('#btnSelectLI5th').bind('click', function () { $('ul li').eq(6).toggleClass('hilite') });
+            //form
+            $('#inText').focus(function () { $(this).parent().addClass('outline') });
+            $('#inText').blur(function () {
+                if ($(this).parent().hasClass('outline')) {
+                    $(this).parent().removeClass('outline');
+                }
+            });
+            $('#inCheck').bind('click', function () { 
+                var parent = $('#inCheck').parent();
+                (!parent.hasClass('outline')) ? parent.addClass('outline') : parent.removeClass('outline');
+            });
+            $('#btnCheckedElements').click(function (e) {
+                var checked = $('input:checked');
+                $('input:checked').wrap("<span style='background-color:red'>");
+                console.log(checked);
+                e.preventDefault();
+            });
     </script>
 
 </body>
