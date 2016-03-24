@@ -1,1 +1,3 @@
 this file has been edited on the remote branch newbranchtotrack
+
+and now edited on the local branch named nb2track that is tracking origin/newbranchtotrack
