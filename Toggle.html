@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Toggle | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <link rel="stylesheet" href="Styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Toggle</h1>
+    </header>
+
+    <main>
+        
+        <div id="disclaimer">This site uses cookies, a recent court ruling now means every websites must notify you that it uses cookies.</div>
+        <hr />
+        <div id="disclaimer2">By using this site you agree to certain terms and conditions that can be found in the FAQ pages.</div>
+        <hr />
+        <div id="no-script">We recommend that you have JavaScript enabled!</div>
+        
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.js"><\/script>')</script>
+    <script>
+        $(function () {
+            console.log('jQuery is ready...');
+
+            //to prevent displaying this button to browsers that do not support JavaScript add it to the page using JavaScript//
+            $('<input type="button" id="hideDisclaimer" value="Hide Disclaimer" style="display:none;" />').insertBefore('#disclaimer');
+
+            //prependTo will insert the selected element INSIDE the element to prepend to - i.e. it is a child element inserted immediately inside the parent
+            $('<strong>START&nbsp;</strong>').prependTo('#disclaimer');
+            //appendTo inserts the selected element as the final child element of the parent
+            $('<strong>&nbsp;END</strong>').appendTo('#disclaimer');
+
+            //only show the button if the browser supports JavaScript//
+            $('#hideDisclaimer').css('display', 'block');
+
+            //the button relies on JavaScript to function//
+            $('#hideDisclaimer').click(function () {
+                $('#disclaimer').toggle();
+
+                if ($('#disclaimer').is(':visible')) {
+                    $(this).val('Hide Disclaimer');
+                }
+                else {
+                    $(this).val('Show Disclaimer');
+                }
+            });
+
+            //shortcut to adding an element with an event to the page
+            $('<div>', {
+                id: 'specialButton',
+                text: 'Click Me',
+                
+                click: function () {
+                    alert('jQuery Rocks!');
+                }
+            }).css(
+            {
+                'outline': '1px solid #000',
+                'background-color': '#eee',
+                'display': 'inline',
+                'padding': '2px'
+            }).insertBefore('#disclaimer2');
+
+            //hide the no-script message from users with JavaScript enabled
+            $('#no-script').remove();
+        });
+    </script>
+</body>
+</html>

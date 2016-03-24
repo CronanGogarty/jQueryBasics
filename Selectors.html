@@ -6,81 +6,26 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    
+
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
     <!--[if !IE]>
         <link rel="stylesheet" href="styles/main.css" />
     <![endif]-->
-    
     <!--[if gte IE7]>
         <link rel="stylesheet" href="styles/main.css" media="screen, projection" />
     <![endif]-->
-    
     <!--[if lte IE 6]>
         <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
     <![endif]-->
-
-    <style type="text/css">
-        /* :root will select the document's root element - in html that is always the html tag*/
-        :root {
-            background-color:#399;
-        }
-        header, footer  {
-            outline:1px solid #333;
-            background-color:#999;
-            box-shadow:10px 10px 3px #000;
-            margin-right:20px;
-            padding-left:10px;
-        }
-        hr  {
-            border:1px solid #000;
-
-        }
-        .hilite {
-            background-color: yellow;
-        }
-        .outline {
-            outline:3px solid #ff0;
-        }
-        .wrapChecked {
-            outline:3px solid red;
-        }
-        header, footer, button, div, span {
-            margin-left:10px;
-        }
-        div {
-            margin-bottom:1px;
-        }
-        .wrappedPara, .divWrappedDiv{
-            margin:0;
-        }
-        span::after {content:"\A"; white-space:pre;}
-        form div {
-            border:1px solid #000;
-            width:300px;
-            text-align:right;
-            min-height:26px;
-        }
-        form label {
-            float:left;
-        }
-    </style>
-
-    <script>
-        $(function () {
-            console.log("jQuery is working");
-        });
-    </script>
-
+    <link rel="stylesheet" href="Styles.css" />
 </head>
 <body>
     <header>
         <h1>Header</h1>
     </header>
-    
+
     <main>
         <button id="btnSelectdivID1">Select by ID</button>
         <div id="divID1">This div has ID= "divID1"</div>
@@ -146,13 +91,14 @@
 
         </ul>
         <hr />
-        
+
         <form id="myForm">
             <button id="btnCheckedElements">Select checked elements</button>
             <button id="btnSelectPassword">Select password input</button>
             <div><label for="inText">Enter name:</label><input id="inText" type="text" /></div>
             <div><label for="inCheck">Checkbox</label><input id="inCheck" type="checkbox" /></div>
-            <div><label>Radio Button:</label><br />
+            <div>
+                <label>Radio Button:</label><br />
                 <input type="radio" id="inRadio1" name="RadioGroup" value="one" checked="checked" /><label for="inRadio1">One</label><br />
                 <input type="radio" id="inRadio2" name="RadioGroup" value="two" /><label for="inRadio2">Two</label><br />
                 <input type="radio" id="inRadio3" name="RadioGroup" value="one" /><label for="inRadio3">Three</label><br />
@@ -160,67 +106,73 @@
             <div><label for="inPassword">Enter password:</label><input type="password" id="inPassword" /></div>
         </form>
     </main>
-    
+
     <footer>
         <p>Footer</p>
     </footer>
-    
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.js"><\/script>')</script>
     <script>
-            // document.getElementById('btnSelectdivID1').addEventListener('click',function()
-            // {
-            //     if(!$("#divID1").hasClass("hilite")) 
-            //     {
-            //          $("#divID1").addClass("hilite");
-            //     }
-            //     else    {
-            //          $("#divID1").removeClass("hilite");
-            //     }
-            // });
-            $("#btnSelectdivID1").bind('click', function () { $("#divID1").toggleClass("hilite") });
-            $("#btnSelectClasses").bind('click', function () { $('.clsSelectClasses').toggleClass('hilite') });
-            $('#btnSelectByAttribute').bind('click', function () { $("div[title='do-select']").toggleClass('hilite') });
-            $('#btnSelectByCompoundCSS').bind('click', function () { $("div#divCompoundSelect2 p").toggleClass('hilite') });
-            $('#btnSelectMultiple').bind('click', function () { $('.divSelectMulti1, #divCompoundSelect1 .wrappedPara').toggleClass('hilite') });
-            $('#btnSelectFirstElement').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:first').toggleClass('hilite') });
-            $('#btnSelectOddElements').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:odd').toggleClass('hilite') });
-            $('#btnSelectGreaterThan').bind('click', function () { $('#divPseudoSelect1Wrapper div:gt(3)').toggleClass('hilite') });
-            $('#btnContainsElement').bind('click', function () {
-                //if($('#divReturnedElement').length) {
-                //    console.log("jQuery contains an element");
-                //}
-                var rand = Math.floor((Math.random() * 10) + 1);    //return a number between 1 and 10 inclusive
-                var selElement = (rand >= 5) ? $('#divReturnedElement') : $('divDoesNotExist');
-                (selElement.length) ? console.log('true') : console.log('false');
-            });
-            $('#btnSelectNot').bind('click', function () { $('#selectAfter ~ div').not('#divReturnedElement').toggleClass('hilite') });
-            $('#btnSelectContains').bind('click', function () { $('.divNot').has('span').toggleClass('hilite') });
-            //ul li
-            $('#btnSelectFirstLI').bind('click', function () { $('ul li').first().toggleClass('hilite') });
-            $('#btnSelectLIclass').bind('click', function () { $('ul li').filter('.liSelect').toggleClass('hilite') });
-            $('#btnSelectLI5th').bind('click', function () { $('ul li').eq(6).toggleClass('hilite') });
-            //form
-            $('#inText').focus(function () { $(this).parent().addClass('outline') });
-            $('#inText').blur(function () {
-                if ($(this).parent().hasClass('outline')) {
-                    $(this).parent().removeClass('outline');
-                }
-            });
-            $('#inCheck').bind('click', function () { 
-                var parent = $('#inCheck').parent();
-                (!parent.hasClass('outline')) ? parent.addClass('outline') : parent.removeClass('outline');
-            });
-            //$('#btnCheckedElements').click(function (e) {
-            //    $('input:checked').addClass('wrapChecked');
-            //    e.preventDefault();
-            //    $('input:checked').fadeOut("slow", function () {
-            //        $(this).removeClass('wrapChecked');
-            //    });
+        $(function () {
+            console.log("jQuery is working");
+        });
+    </script>
+
+    <script>
+        // document.getElementById('btnSelectdivID1').addEventListener('click',function()
+        // {
+        //     if(!$("#divID1").hasClass("hilite"))
+        //     {
+        //          $("#divID1").addClass("hilite");
+        //     }
+        //     else    {
+        //          $("#divID1").removeClass("hilite");
+        //     }
+        // });
+        $("#btnSelectdivID1").bind('click', function () { $("#divID1").toggleClass("hilite") });
+        $("#btnSelectClasses").bind('click', function () { $('.clsSelectClasses').toggleClass('hilite') });
+        $('#btnSelectByAttribute').bind('click', function () { $("div[title='do-select']").toggleClass('hilite') });
+        $('#btnSelectByCompoundCSS').bind('click', function () { $("div#divCompoundSelect2 p").toggleClass('hilite') });
+        $('#btnSelectMultiple').bind('click', function () { $('.divSelectMulti1, #divCompoundSelect1 .wrappedPara').toggleClass('hilite') });
+        $('#btnSelectFirstElement').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:first').toggleClass('hilite') });
+        $('#btnSelectOddElements').bind('click', function () { $('div#divPseudoSelect1Wrapper .divWrappedDiv:odd').toggleClass('hilite') });
+        $('#btnSelectGreaterThan').bind('click', function () { $('#divPseudoSelect1Wrapper div:gt(3)').toggleClass('hilite') });
+        $('#btnContainsElement').bind('click', function () {
+            //if($('#divReturnedElement').length) {
+            //    console.log("jQuery contains an element");
+            //}
+            var rand = Math.floor((Math.random() * 10) + 1);    //return a number between 1 and 10 inclusive
+            var selElement = (rand >= 5) ? $('#divReturnedElement') : $('divDoesNotExist');
+            (selElement.length) ? console.log('true') : console.log('false');
+        });
+        $('#btnSelectNot').bind('click', function () { $('#selectAfter ~ div').not('#divReturnedElement').toggleClass('hilite') });
+        $('#btnSelectContains').bind('click', function () { $('.divNot').has('span').toggleClass('hilite') });
+        //ul li
+        $('#btnSelectFirstLI').bind('click', function () { $('ul li').first().toggleClass('hilite') });
+        $('#btnSelectLIclass').bind('click', function () { $('ul li').filter('.liSelect').toggleClass('hilite') });
+        $('#btnSelectLI5th').bind('click', function () { $('ul li').eq(6).toggleClass('hilite') });
+        //form
+        $('#inText').focus(function () { $(this).parent().addClass('outline') });
+        $('#inText').blur(function () {
+            if ($(this).parent().hasClass('outline')) {
+                $(this).parent().removeClass('outline');
+            }
+        });
+        $('#inCheck').bind('click', function () {
+            var parent = $('#inCheck').parent();
+            (!parent.hasClass('outline')) ? parent.addClass('outline') : parent.removeClass('outline');
+        });
+        //$('#btnCheckedElements').click(function (e) {
+        //    $('input:checked').addClass('wrapChecked');
+        //    e.preventDefault();
+        //    $('input:checked').fadeOut("slow", function () {
+        //        $(this).removeClass('wrapChecked');
+        //    });
         //});
-            $('#btnCheckedElements').bind('click', function () {
-                $('input:checked').toggleClass('wrapChecked');
-                return false;
-            });
-            $('#btnSelectPassword').click(function () { $('#inPassword').toggleClass('hilite'); return false; });
+        $('#btnCheckedElements').bind('click', function () {
+            $('input:checked').toggleClass('wrapChecked');
+            return false;
+        });
+        $('#btnSelectPassword').click(function () { $('#inPassword').toggleClass('hilite'); return false; });
     </script>
 
 </body>

@@ -1,0 +1,56 @@
+﻿/* :root will select the document's root element - in html that is always the html tag*/
+:root {
+    background-color: #399;
+}
+
+header, footer {
+    outline: 1px solid #333;
+    background-color: #999;
+    box-shadow: 10px 10px 3px #000;
+    margin-right: 20px;
+    padding-left: 10px;
+}
+
+hr {
+    border: 1px solid #000;
+}
+
+.hilite {
+    background-color: yellow;
+}
+
+.outline {
+    outline: 3px solid #ff0;
+}
+
+.wrapChecked {
+    outline: 3px solid red;
+}
+
+header, footer, button, div, span, input#hideDisclaimer {
+    margin-left: 10px;
+}
+
+div {
+    margin-bottom: 1px;
+}
+
+.wrappedPara, .divWrappedDiv {
+    margin: 0;
+}
+
+span::after {
+    content: "\A";
+    white-space: pre;
+}
+
+form div {
+    border: 1px solid #000;
+    width: 300px;
+    text-align: right;
+    min-height: 26px;
+}
+
+form label {
+    float: left;
+}

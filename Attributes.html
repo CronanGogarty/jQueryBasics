@@ -1,7 +1,12 @@
 <html>
 
 <head>
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Attributes | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="Styles.css" />
 </head>
 
 <body>
@@ -15,6 +20,7 @@
         <li><a href="http://contribute.jquery.org/web-sites/">Web Sites</a></li>
     </ul>
     
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.js"><\/script>')</script>
     <script>
         $( document ).ready(function() {
         $( "a" ).attr( "href", "allMyHrefsAreTheSameNow.html" );
