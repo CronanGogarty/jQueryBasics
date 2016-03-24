@@ -1,0 +1,132 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>SimpleAnimations | jQueryBasics</title>
+    <meta name="description" content="">
+    <meta name="author" content="Cronán Gogarty" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
+    <link rel="stylesheet" href="Styles.css" media="screen, projection">
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <header>
+        <h1>Simple Animations</h1>
+    </header>
+
+    <main>
+        <h2>Contents</h2>
+        <button id="btnFade">Fade</button>
+        <p id="fadePara">This is a paragraph of text that will be hidden when the user clicks the button above. Using a simple jQuery animation technique the paragraph will fade into obscurity.</p>
+        <hr />
+        <button id="btnToggle">Toggle</button>
+        <p id="togglePara">This is a paragraph of text that will be toggled between visibility and invisibility using the "toggle" button above.</p>
+        <hr />
+        <button id="btnSlide">Slide</button>
+        <p id="slidePara">This paragraph will slide up into itself and disappear. Using the slideToggle method means that clicking the "slide" button will alternately show or hide the paragraph.</p>
+        <hr />
+        <button id="btnCallback">Callback</button>
+        <p id="callbackPara">When this paragraph has completed its animation, a callback function will execute and write to the console.</p>
+        <hr />
+        <p>Mouseover the rows to see a hover effect, click on a row to see the toggleClass method in action.</p>
+        <table>
+            <tr>
+                <td>Row 1</td>
+            </tr>
+            <tr>
+                <td>Row 2</td>
+            </tr>
+            <tr>
+                <td>Row 3</td>
+            </tr>
+            <tr>
+                <td>Row 4</td>
+            </tr>
+            <tr>
+                <td>Row 5</td>
+            </tr>
+        </table>
+        <hr />
+        <p>A spoiler example.</p>
+        <p>In the movie "The Usual Suspects" Kaiser Soze is played by; <span class="spoiler">Kevin Spacey</span>. Imagine not knowing that!</p>
+    </main>
+
+    <footer>
+        <h4>Footer</h4>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script>try { Modernizr } catch (e) { document.write('<script src="js/vendor/modernizr-2.8.3.min.js"><\/script>') }</script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+
+    <script>
+        //fade paragraph
+        $('#btnFade').click(function () {
+            $('#fadePara').fadeOut(1000);   //time in miliseconds
+        });
+
+        //toggle paragraph with time arguments
+        $('#btnToggle').click(function () {
+            $('#togglePara').toggle('slow');
+        });
+
+        //slide
+        $('#btnSlide').click(function () {
+            //slide types = slideUp, slideDown, slideToggle
+            $('#slidePara').slideToggle('normal');  //speed keywords = slow, fast, normal
+        });
+
+        //callback
+        $('#btnCallback').click(function () {
+            $('#callbackPara').fadeToggle(2000, function () {
+                if($('#callbackPara').is(':visible'))    {
+                    console.log("visible") 
+                }
+                else {
+                    console.log("invisible");
+                }
+            });
+        });
+
+        //hover
+        $('td').hover(function () {
+            $(this).addClass('hilite');
+        }, function () {
+            $(this).removeClass('hilite');
+        });
+
+        //toggleclass
+        $('td').click(function () {
+            $(this).toggleClass('makeRed');
+        });
+
+        //spoiler example
+        $('.spoiler').hide();
+        $('<input type="button" class="revealSpoiler" value="show">').insertBefore('.spoiler');
+        $('.revealSpoiler').click(function () {
+            $(this).hide();
+            $(this).next().fadeIn();
+        });
+
+    </script>
+    
+    
+
+
+
+    <!--Cronán Gogarty | github.com/CronanGogarty/ | codepen.io/CronanGogarty/ | jsfiddle.net/user/CronanGogarty/ -->
+</body>
+</html>

@@ -6,15 +6,18 @@
 header, footer {
     outline: 1px solid #333;
     background-color: #999;
-    box-shadow: 10px 10px 3px #000;
+    box-shadow: 10px 10px 3px #222;
     margin-right: 20px;
     padding-left: 10px;
 }
 
-hr {
+hr, table, td {
     border: 1px solid #000;
 }
 
+table {
+    width:80%;
+}
 .hilite {
     background-color: yellow;
 }
@@ -23,11 +26,17 @@ hr {
     outline: 3px solid #ff0;
 }
 
+.makeRed {
+    background-color:#f00;
+    color:#fff;
+
+}
+
 .wrapChecked {
     outline: 3px solid red;
 }
 
-header, footer, button, div, span, input#hideDisclaimer {
+header, footer, button, div, span, input#hideDisclaimer, h2, main>p, main>table {
     margin-left: 10px;
 }
 
