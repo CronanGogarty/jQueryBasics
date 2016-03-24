@@ -18,7 +18,13 @@
         <hr />
         <div id="disclaimer2">By using this site you agree to certain terms and conditions that can be found in the FAQ pages.</div>
         <hr />
+        <div>There is a hidden div below that will only display for users with no JavaScript support.</div>
         <div id="no-script">We recommend that you have JavaScript enabled!</div>
+        <hr />
+        <div>
+            <p id="addHtml"></p>
+            <p id="addText"></p>
+        </div>
         
     </main>
 
@@ -69,6 +75,12 @@
 
             //hide the no-script message from users with JavaScript enabled
             $('#no-script').remove();
+
+            //add html to a paragraph// //add text to a paragraph
+            $('p#addHtml').html("<strong>NOTE:</strong>this <em>html</em> content was brought to you by the power of jQuery");
+            $('p#addText').text("NOTE: I cannot add <tags> to the page using the .text method");
+            console.log("Using jQuery I added \"" + $('#addText').text() + "\" to the #addText p element");
+
         });
     </script>
 </body>
