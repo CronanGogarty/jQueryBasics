@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Animations | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta name="description" content="">
+    <meta name="author" content="Cronán Gogarty" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
+    <link rel="stylesheet" href="Styles.css" media="screen, projection">
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
+
+</head>
+<body>
+    <header>
+        <h1>jQueryBasics Animations</h1>
+    </header>
+
+    <main>
+        <h2>Animations</h2>
+
+        <h3>Add or remove values</h3>
+        <ul id="navigation">
+            <li><a href="">URL 1</a></li>
+            <li><a href="">URL 2</a></li>
+            <li><a href="">URL 3</a></li>
+            <li><a href="">URL 4</a></li>
+            <li><a href="">URL 5</a></li>
+            <li><a href="">URL 6</a></li>
+        </ul>
+
+        <hr />
+
+        <h3>Specify animation value</h3>
+        <button id="hideDisclaimer">Hide disclaimer</button>
+        <div id="disclaimer">This is a paragraph of text that will be hidden when the user clicks the button above.</div>
+
+        <hr />
+
+        <button id="btnAnimateLinear">Animate Linear</button>
+        <button id="btnAnimateSwing">Animate Swing</button>
+        <button id="btnEaseOutBounce">Animate EaseOutBounce</button>
+        <button id="btnEaseInExpo">Animate EaseInExpo</button>
+        <button id="btnEaseOutCirc">Animate EaseOutCirc</button>
+        <button id="btnEaseOutElastic">Animate EaseOutElastic</button>
+        <button id="btnReset">Reset</button>
+        <p id="firstPara">This is the first paragraph of text, the ID has appropriately been set to #firstPara.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+
+        <hr />
+
+        <section id="bio">
+            <h2>Hot List</h2>
+
+            <h3>Conor McGregor</h3>
+            <div>
+                <img alt="Conor McGregor" src="http://theeyeofmma.com/wp-content/uploads/2015/08/conor-mcgregor-as-tuf-coach-i-didnt-want-to-do-it.jpg" width="251" height="197">
+                <p>About Conor McGregor</p>
+            </div>
+
+            <h3>Donald Trump</h3>
+            <div>
+                <img alt="Donald Trump" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Donald_Trump_August_19%2C_2015_%28cropped2%29.jpg/100px-Donald_Trump_August_19%2C_2015_%28cropped2%29.jpg" width="100" height="147">
+                <p>About Donald Trump</p>
+            </div>
+
+            <h3>Bill Burr</h3>
+            <div>
+                <img alt="Bill Burr" src="http://vignette1.wikia.nocookie.net/breakingbad/images/f/f2/Bill_Burr.jpg/revision/latest?cb=20120919071951" width="134" height="197">
+                <p>About Bill Burr</p>
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <aside style="visibility:hidden;">
+        <h3>Aside</h3>
+    </aside>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script>try { Modernizr } catch (e) { document.write('<script src="js/vendor/modernizr-2.8.3.min.js"><\/script>') }</script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.12.0.min.js"><\/script>')</script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+    <script>window.jQuery.ui || document.write('<script src="js/jquery-ui-1.11.4.js"><\/script>')</script>
+
+    <script>
+        $(function () {
+            console.log("jQuery is working");
+        });
+    </script>
+
+    <script>
+
+        //animate colors on pageready
+        $(function () {
+            $('#disclaimer').animate({ "background-color": "#ff9f5f" }, 2000);
+        });
+
+        //animate elements by adding or subtracting values
+        $('#navigation li').hover(function () {
+            $(this).animate({ "padding-left": "+=15px" }, 200);
+        }, function () {
+            $(this).animate({ "padding-left": "-=15px" }, 200);
+        });
+
+        //specify the individual properties  you wish to animate
+        $('#hideDisclaimer').click(function () {
+            $('#disclaimer').animate({
+                "opacity": "hide",
+                "height": "hide"
+            }, "slow");
+        });
+
+        //use some animation easing - linear & swing are built into the core jQuery library
+        $('#btnAnimateLinear').click(function () {
+            $('p:first').animate({ 'height': '+=150px' }, 2000, 'linear');
+        });
+        $('#btnAnimateSwing').click(function () {
+            $('p:first').animate({ 'height': '-=150px' }, 2000, 'swing');
+        });
+
+        //advanced animation easing is available from jQuery UI or the Easing plugin
+        $('#btnEaseOutBounce').click(function () {
+            $('p:first').animate({ "height": "+=200px" }, 2000, "easeOutBounce");
+        });
+        $('#btnEaseInExpo').click(function () {
+            $('p:first').animate({ "height": "-=200px" }, 2000, "easeInExpo");
+        });
+        $('#btnEaseOutCirc').click(function () {
+            $('p:first').animate({ "height": "+=200px" }, 2000, 'easeOutCirc');
+        });
+        $('#btnEaseOutElastic').click(function () {
+            $('p:first').animate({ "height": "-=200px" }, 2000, "easeOutElastic");
+        });
+        $('#btnReset').click(function () {
+            $('p:first').height('auto');
+        });
+
+        //bio section animations
+        //firstly hide all the divs in the bio section
+        $('#bio > div').hide();
+        //then display the first div
+        $('#bio > div:first').show();
+
+        $('#bio > h3').click(function () {
+            $(this).next().animate({
+                "height": "toggle"
+            }, 1200, "easeOutBounce");
+        });
+
+
+
+
+
+    </script>
+
+</body>
+</html>

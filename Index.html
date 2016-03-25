@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Home | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta name="description" content="">
+    <meta name="author" content="Cronán Gogarty" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
+    <link rel="stylesheet" href="Styles.css" media="screen, projection">
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
+
+</head>
+<body>
+    <header>
+        <h1>jQueryBasics Home</h1>
+    </header>
+
+    <main>
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="ready.html" name="jquery selectors" id="jqSelectors">jQuery Selectors</a></li>
+            <li><a href="SimpleAnimations.html" name="jquery basic animations" id="jqSimplaAnimations">Basic jQuery Animations</a></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </main>
+
+    <!-- aside is hidden in Styles.-->
+    <aside style="visibility:hidden;">
+        <h3>Aside</h3>
+    </aside>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script>try { Modernizr } catch (e) { document.write('<script src="js/vendor/modernizr-2.8.3.min.js"><\/script>') }</script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.12.0.min.js"><\/script>')</script>
+
+    <script>
+        $(function () {
+            console.log("jQuery is working");
+        });
+    </script>
+
+</body>
+</html>
