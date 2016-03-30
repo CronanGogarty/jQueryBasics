@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Chaining Actions | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta name="description" content="">
+    <meta name="author" content="Cronán Gogarty" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
+    <link rel="stylesheet" href="Styles.css" media="screen, projection">
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
+
+</head>
+<body>
+    <header>
+        <h1>jQuery Chaining Actions</h1>
+    </header>
+
+    <nav>
+        <ul id="navigation">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Buy!</a></li>
+            <li><a href="#">Gift Ideas</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Chaining</h2>
+        <button id="btnHideSlide">Hide 'n Slide</button>
+        <button id="btnHideSlideLast">Hide/Slide Last P</button>
+        <p>This is the first paragraph of text, the ID has appropriately been set to #firstPara.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>Other paragraphs have little relevence in this exercise.</p>
+        <p>This is the last paragraph, it can be selected using the p:last pseudoclass.</p>
+    </main>
+
+    <!-- aside is hidden in Styles.-->
+    <aside style="visibility:hidden;">
+        <h3>Aside</h3>
+    </aside>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script>try { Modernizr } catch (e) { document.write('<script src="js/vendor/modernizr-2.8.3.min.js"><\/script>') }</script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.12.0.min.js"><\/script>')</script>
+    <!--//ONLY INCLUDE JQUERY UI IF USING ADVANCED ANIMATION TECHNIQUES-->
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+    <script>window.jQuery.ui || document.write('<script src="js/jquery-ui-1.11.4.js"><\/script>')</script>
+
+    <script>
+        $(function () {
+            console.log("jQuery is working");
+        });
+
+        //basic example of chaining
+        $('#btnHideSlide').click(function () {
+            $('p:first').hide().slideDown('slow').fadeOut();
+        });
+        
+        //chaining with a delay 
+        $('#btnHideSlideLast').click(function () {
+            $('main > p:last')
+                .hide()
+                .slideDown('slow')
+                .append(" Wait for it......")
+                .delay(2000)
+                .fadeOut();
+        });
+
+        //navigation animation
+        $('<div id="navigationBlob"></div>').css({
+            'z-index': -100,
+            width: 0,
+            position: 'absolute',
+            height: $('#navigation li:first a').height() + 2
+        }).prependTo('#navigation');
+
+        $('#navigation a').hover(function () {
+            //MouseOver
+            var lefty = $(this).position().left;
+            var topper = $(this).position().top;
+            $('#navigationBlob').animate(
+            {
+                width: $(this).width() + 10,
+                left: lefty,
+                top: topper
+            },
+            {
+                duration: 'slow',
+                easing: 'easeOutCirc',
+                queue: false
+            }
+            )
+            
+        }, function () {
+            //MouseOut
+            $('#navigationBlob').animate(
+            {
+                width: 0,
+                left: $(this).position().left
+            },
+            {
+                duration:'slow',
+                easing: 'easeOutCirc',
+                queue: false
+            })
+                .animate(
+            {
+                width:10000,
+                //left: $(this).position().left - 1000
+            }, 'fast'
+            );
+        });
+    </script>
+
+</body>
+</html>
