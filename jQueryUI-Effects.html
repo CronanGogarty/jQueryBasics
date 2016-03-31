@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery UI Effects | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta name="description" content="">
+    <meta name="author" content="Cronán Gogarty" />
+    
+    <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
+    <link rel="stylesheet" href="Styles.css" media="screen, projection">
+
+
+</head>
+<body>
+    <header>
+        <h1>jQuery UI Effects</h1>
+    </header>
+
+    <main>
+        <h2>Effects!</h2>
+        <p>This is the 1st paragraph - effects will be applied to this paragraph</p>
+        <p>Other paragraphs are inconsequential.</p>
+        <p>Other paragraphs are inconsequential.</p>
+        <p>Other paragraphs are inconsequential.</p>
+        <p>Other paragraphs are inconsequential.</p>
+        <p>Other paragraphs are inconsequential.</p>
+        <p>Other paragraphs are inconsequential.</p>
+        <p>Other paragraphs are inconsequential - except possibly the final paragraph.</p>
+    </main>
+
+    <!-- aside is hidden in Styles.-->
+    <aside style="visibility:hidden;">
+        <h3>Aside</h3>
+    </aside>
+
+    <footer>
+        <p><a href="Index.html">HOME</a></p>
+    </footer>
+
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="js/jquery-ui-1.11.4.js"></script>
+
+
+    <script>
+    $(function () {
+        console.log("jQuery is working");
+    });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('p:first')
+                .effect('slide', { 'direction': 'right' }, 3000)
+                .effect('pulsate', {}, 3000)
+                .effect('shake', { times: 3 }, 300).delay(2700)
+                .effect('highlight', {}, 3000)
+                
+                
+            
+                .hide('explode', {}, 1000)
+        });
+    </script>
+
+</body>
+</html>
