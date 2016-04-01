@@ -6,11 +6,15 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <meta name="description" content="">
     <meta name="author" content="Cronán Gogarty" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
     <link rel="stylesheet" href="Styles.css" media="screen, projection">
-
-
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
 </head>
 <body>
     <header>
@@ -38,8 +42,15 @@
         <p><a href="Index.html">HOME</a></p>
     </footer>
 
-    <script src="js/jquery-1.11.1.js"></script>
-    <script src="js/jquery-ui-1.11.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script>try { Modernizr } catch (e) { document.write('<script src="js/vendor/modernizr-2.8.3.min.js"><\/script>') }</script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.12.0.min.js"><\/script>')</script>
+    <!--//ONLY INCLUDE JQUERY UI IF USING ADVANCED ANIMATION TECHNIQUES-->
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+    <script>window.jQuery.ui || document.write('<script src="js/jquery-ui-1.11.4.js"><\/script>')</script>
+    
+
 
 
     <script>

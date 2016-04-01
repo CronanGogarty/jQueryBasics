@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Scroll | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta name="description" content="">
+    <meta name="author" content="Cronán Gogarty" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
+    <link rel="stylesheet" href="Styles.css" media="screen, projection">
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
+
+    <style>
+        header {
+            margin-top:60px;
+        }
+        #news {
+            height:200px;
+            width:200px;
+            overflow:scroll;
+        }
+        #celebs {
+            height:2000px;
+            outline:1px solid #000;
+        }
+    </style>
+
+</head>
+<body>
+
+    <nav id="navigation">
+        <ul>
+            <li id="home"><a href="#">Home</a></li>
+            <li><a href="#">Buy Now!</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Gift Ideas</a></li>
+        </ul>
+    </nav>
+
+    <header id="header">
+        <h1>jQuery Scroll</h1>
+    </header>
+
+    
+
+    <main>
+        <h2>Scroll</h2>
+        <div id="news">
+            <h2>Latest News</h2>
+            <p>
+                Which member of the seminal calypso/lectro band <em>C&amp;C Music Sweatshop</em> was spotted last night at <em>Dirt</em>, the trendy New York restaurant that serves only food caught and retrieved by the chef's own hands?
+                <span class="spoiler">Yes! It's the ever-effervescent, <em>Glendatronix</em>!</span>
+            </p>
+            <p>Who lost their recording contract today? <span class="spoiler">The Zaxntines!</span></p>
+        </div>
+        <div id="celebs">
+            <h2 class="heading">Our Celebrities</h2>
+            <p class="info">
+                We have an ever changing roster of newly chipped celebrities. But it can take as little as a week for the little critters to realise they've been tagged - so you have to be fast!
+            </p>
+            <table class="data">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Occupation</th>
+                        <th>Approx. Location</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>203A</td>
+                        <td>Johny Stardust</td>
+                        <td>Front-man</td>
+                        <td>Los Angeles</td>
+                        <td>$39.95</td>
+                    </tr>
+                    <tr>
+                        <td>141B</td>
+                        <td>Beau Dandy</td>
+                        <td>Singer</td>
+                        <td>New York</td>
+                        <td>$39.95</td>
+                    </tr>
+                    <tr>
+                        <td>2031</td>
+                        <td>Mo' Fat</td>
+                        <td>Producer</td>
+                        <td>New York</td>
+                        <td>$19.95</td>
+                    </tr>
+                    <tr>
+                        <td>007F</td>
+                        <td>Kellie Kelly</td>
+                        <td>Singer</td>
+                        <td>Omaha</td>
+                        <td>$11.95</td>
+                    </tr>
+                    <tr>
+                        <td>8A05</td>
+                        <td>Darth Fader</td>
+                        <td>DJ</td>
+                        <td>London</td>
+                        <td>$19.95</td>
+                    </tr>
+                    <tr>
+                        <td>6636</td>
+                        <td>Glendatronix </td>
+                        <td>Keytarist</td>
+                        <td>London</td>
+                        <td>$39.95</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</main>
+
+    <!-- aside is hidden in Styles.-->
+    <aside style="visibility:hidden;">
+        <h3>Aside</h3>
+    </aside>
+
+    <footer>
+        <p><a href="Index.html">HOME</a>&nbsp;|&nbsp;<a href="#">TOP ^</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script>try { Modernizr } catch (e) { document.write('<script src="js/vendor/modernizr-2.8.3.min.js"><\/script>') }</script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.12.0.min.js"><\/script>')</script>
+    <!--//ONLY INCLUDE JQUERY UI IF USING ADVANCED ANIMATION TECHNIQUES-->
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+    <script>window.jQuery.ui || document.write('<script src="js/jquery-ui-1.11.4.js"><\/script>')</script>
+
+    <script>
+    $(function () {
+        console.log("jQuery is working");
+    });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#header').append("<span id='scrolldiv' style='position:relative; visibility:hidden'>You scrolled...</span>");
+            //setting the css left property works better here, when set in the scroll function the span tends to jump around
+            $('#scrolldiv').css({
+                'left': function () {
+                    return ($('#header').width() / 2) - ($('#scrolldiv').width() / 2);
+                }
+            });
+            $('#news').scroll(function () {
+                $('#scrolldiv').css({
+                    'visibility': 'visible',
+                    //'left': function () {
+                    //    return ($('#header').width() / 2) - ($('#scrolldiv').width() / 2);
+                    //}
+                });
+                $('#scrolldiv').effect('shake', { times: 1 }, 100);
+            })
+        });
+
+        //use the window.scroll function to fix the navigation to the top of the page
+        $(window).scroll(function () {
+            $('#navigation').css({'top': $(document).scrollTop()});
+        });
+
+        //scroll to top
+        $("a[href='#']").click(function () {
+            $('html').animate({ scrollTop: 0 }, 3000);
+            return false;
+        });
+
+        //add in the navigation effects
+        $('#navigation li').hover(
+            function () {
+                $(this)
+                    .stop(true)
+                    .animate(
+                        { height: 60 },
+                        { duration: 500, easing: 'easeOutElastic' }
+                    )
+            },
+            function () {
+                $(this)
+                .stop(true)
+                .animate(
+                    { 'height': 20 },
+                    { 'duration': 300, easing: 'easeInCirc' }
+                )
+            }
+        );
+    </script>
+
+</body>
+</html>
