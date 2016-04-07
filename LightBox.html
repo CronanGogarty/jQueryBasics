@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LightBox | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta name="description" content="">
+    <meta name="author" content="Cronán Gogarty" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
+    <link rel="stylesheet" href="Styles.css" media="screen, projection">
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
+    <style>
+        #overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: #000 url(images/loader.gif) no-repeat scroll center center;
+        }
+
+        #lightbox {
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>LightBox</h1>
+    </header>
+
+    <main>
+        <h2>jQuery LightBox</h2>
+        <p><a href="images/HeMan.jpg" class="lightbox">He Man</a></p>
+    </main>
+
+    <!-- aside is hidden in Styles.-->
+    <aside style="visibility:hidden;">
+        <h3>Aside</h3>
+    </aside>
+
+    <footer>
+        <p><a href="Index.html">HOME</a>&nbsp;|&nbsp;<a href="#">TOP ^</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script>try { Modernizr } catch (e) { document.write('<script src="js/vendor/modernizr-2.8.3.min.js"><\/script>') }</script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.12.0.min.js"><\/script>')</script>
+    <!--//ONLY INCLUDE JQUERY UI IF USING ADVANCED ANIMATION TECHNIQUES
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+    <script>window.jQuery.ui || document.write('<script src="js/jquery-ui-1.11.4.js"><\/script>')</script>
+    -->
+
+    <script>
+        $(function () {
+            console.log("jQuery is working");
+        });
+    </script>
+
+    <script>
+        $('a.lightbox').click(function (e) {
+
+            $('body').css('overflow-y', 'hidden');
+
+            $('<div id="overlay"></div>')
+                .css("top", $(document).scrollTop())
+                .css("opacity", 0)
+                .animate({ "opacity": 0.75 }, 'slow')
+                .appendTo('body');
+
+            $('<div id="lightbox"></div>')
+                .hide()
+                .appendTo('body');
+
+            $('<img>')
+                .attr('src', $(this).attr('href'))
+                .load(function () { //the load event handler fires when the image is loaded
+                    positionLightBoxImage();
+                })
+                .click(function () {
+                    removeLightBoxImage();
+                })
+                .appendTo('#lightbox')
+
+            return false;
+
+            function positionLightBoxImage() {
+                //console.log("window.height = " + $(window).height());
+                //console.log("lightbox.height = " + $('#lightbox').height());
+                //var top = (($(window).height() / 2) - ($('#lightbox').height() / 2));
+                var top = ($(window).height() - $('#lightbox').height()) / 2;               //top = (win.H - lightbox.H) / 2
+                //console.log("top = " + top);
+                //var left = (($(window).width() / 2) - ($('#lightbox').width() / 2));
+                var left = ($(window).width() - $('#lightbox').width()) / 2;                //left = (win.L - lightbox.L) / 2
+                //console.log("window.width = " + $(window).width());
+                //console.log("lightbox.width = " + $('#lightbox').width());
+                //console.log("left = " + left);
+                $('#lightbox')
+                .css({
+                    'top': top + $('document').scrollTop(),
+                    'left': left
+                })
+                .fadeIn();
+            };
+
+            function removeLightBoxImage() {
+                $('#overlay, #lightbox')
+                .fadeOut('slow', function () {
+                    $(this).remove();
+                    $('body').css('overflow-y', 'auto');
+                })
+            };
+        });
+    </script>
+
+</body>
+</html>
