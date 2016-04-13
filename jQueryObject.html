@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>The jQuery Object | jQueryBasics</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta name="description" content="">
+    <meta name="author" content="Cronán Gogarty" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+    <!--<link rel="stylesheet" href="css/main.css" media="screen, projection">-->
+    <link rel="stylesheet" href="Styles.css" media="screen, projection">
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+    <![endif]-->
+    <style>
+        #target,
+        #uniquediv {
+            outline:1px solid #000;
+            background: red;
+            color: #000;
+        }
+        code {
+            outline:1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The jQuery Object</h1>
+    </header>
+
+    <main>
+        <h2>Wrapping a DOM element in a jQuery Object</h2>
+        <p>Select the div with id="target", then wrap it in a jQuery object so we can use the <em>.html</em> method to apply innerHTML.</p>
+        <div id="target">Div id="target"</div>
+        <hr />
+        <h2>Returning DOM elements in a jQuery Object</h2>
+        <p>When we select DOM elements using a CSS selector (e.g. $('h2')) this returns a jQuery object that contains all matched elements.</p>
+        <p>Thus when we select $('h2') the jQuery object has a <em>.length</em> property with a value of <span id="jqObjectCount"></span>.</p>
+        <p id="h2p">The text contained in the first of our 2 <em>h2</em> elements is "<span id="firsth2text"></span>". Below we will output the h2 as a DOM element (not this involved a clone() method)</p>
+        <hr />
+        <h2>jQuery Objects are unique</h2>
+        <p>Below is a div with id="uniquediv".<br />
+        Using the following jQuery selectors returns two unique jquery objects that are not equal<br />
+            <code>
+                var unique1 = $('#uniquediv');<br />
+                var unique2 = $('#uniquediv');<br />
+                var trufalse = (unique1 === unique2)<br />
+            </code>truefalse =<span id="truefalse"></span>!!
+        </p>
+        <p>If we want to test that the DOM elements contained in the jQuery objects are equal, we use the <em>.get()</em> method to return the wrapped DOM elements.
+        <br />
+        Therefore <br />
+        <code>
+            var unique1DOMelement = unique1.get(0);<br />
+            var unique2DOMelement = unique2.get(0);<br />
+            var domElementsEqual = (unique1DOMelement === unique2DOMelement);<br />
+        </code>domElementsEqual = <span id="domElementsTrueFalse"></span>!
+        </p>
+        <div id="uniquediv">this is a unique div</div>
+    </main>
+
+    <!-- aside is hidden in Styles.-->
+    <aside style="visibility:hidden;">
+        <h3>Aside</h3>
+    </aside>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script>try { Modernizr } catch (e) { document.write('<script src="js/vendor/modernizr-2.8.3.min.js"><\/script>') }</script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.12.0.min.js"><\/script>')</script>
+    <!--//ONLY INCLUDE JQUERY UI IF USING ADVANCED ANIMATION TECHNIQUES
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+    <script>window.jQuery.ui || document.write('<script src="js/jquery-ui-1.11.4.js"><\/script>')</script>
+    -->
+
+    <script>
+    $(function () {
+        console.log("jQuery is working");
+    });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var target = document.getElementById('target');
+            if (target) {
+                console.log('target...');
+                $(target).html("Hello <b>World</b>!");
+                /*wrapping the DOM element in a $object eliminates 
+                /cross-browser compatibility issues with .innerHTML*/
+
+            }
+            else
+                console.log('no target');
+
+            var jqObject = $('h2');
+            $('#jqObjectCount').text(jqObject.length);
+            console.log(jqObject.length);
+
+            var h2text = jqObject.eq(0)
+            //var h2text is now a jQuery object containing the 1st matched h2 element
+            $('#firsth2text').text(h2text.text());
+
+            //we can use .get to return the DOM element as opposed to a jQuery object
+            var h2DOMelement = jqObject.clone().get(0);
+            $('#h2p').after(h2DOMelement);
+
+            var unique1 = $('#uniquediv');
+            var unique2 = $('#uniquediv');
+
+            $('#truefalse').text(unique1 === unique2)
+            console.log(unique1 === unique2);
+
+            var unique1DOMelement = unique1.get(0);
+            var unique2DOMelement = unique2.get(0);
+            $('#domElementsTrueFalse').text(unique1DOMelement === unique2DOMelement);
+        })
+
+
+    </script>
+
+</body>
+</html>
